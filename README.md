@@ -86,7 +86,6 @@
 project/
 ├─ main.py                 # エントリーポイント
 └─ src/
-   ├─ __init__.py
    ├─ ui.py                # CLI / GUI メニュー
    ├─ lang.py              # 言語管理
    ├─ preferences.py       # preferences.ini 解析

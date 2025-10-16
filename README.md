@@ -17,7 +17,7 @@
 ---
 ## 🎥 デモ動画
 
-[動画を見る](assets/demo.mp4)
+[![Demo](assets/demo.png)](assets/demo.mp4)
 
 ## 🧩 対応環境
 

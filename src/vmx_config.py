@@ -3,19 +3,20 @@ from pathlib import Path
 
 from .vmx_utils import set_vmx_value, read_vmx
 
+OPTIMIZE_SETTINGS = {
+    "sched.mem.pshare.enable": "FALSE",
+    "mainMem.useNamedFile": "FALSE",
+    "prefvmx.minVmMemPct": "100",
+    "prefvmx.useRecommendedLockedMemSize": "TRUE",
+    "mainMem.partialLazySave": "FALSE",
+    "mainMem.partialLazyRestore": "FALSE",
+    "priority.grabbed": "high",
+    "priority.ungrabbed": "normal",
+}
+
 def apply_optimization(vmx_path: Path):
     """VMXに最適化設定を書き込む"""
-    settings = {
-        "sched.mem.pshare.enable": "FALSE",
-        "mainMem.useNamedFile": "FALSE",
-        "prefvmx.minVmMemPct": "100",
-        "prefvmx.useRecommendedLockedMemSize": "TRUE",
-        "mainMem.partialLazySave": "FALSE",
-        "mainMem.partialLazyRestore": "FALSE",
-        "priority.grabbed": "high",
-        "priority.ungrabbed": "normal"
-    }
-    for k, v in settings.items():
+    for k, v in OPTIMIZE_SETTINGS.items():
         set_vmx_value(vmx_path, k, v)
 
 def apply_spoofing(vmx_path: Path):
@@ -43,17 +44,8 @@ def is_config_applied(vmx_path: Path, group_name: str) -> bool:
         if group_name == "spoofing":
             return "uuid.bios" in vmx_data and "smbios.uuid" in vmx_data
         elif group_name == "optimize":
-            expected = {
-                "sched.mem.pshare.enable": "FALSE",
-                "mainMem.useNamedFile": "FALSE",
-                "prefvmx.minVmMemPct": "100",
-                "prefvmx.useRecommendedLockedMemSize": "TRUE",
-                "mainMem.partialLazySave": "FALSE",
-                "mainMem.partialLazyRestore": "FALSE",
-                "priority.grabbed": "high",
-                "priority.ungrabbed": "normal"
-            }
-            return all(vmx_data.get(k) == v for k, v in expected.items())
+            return all(vmx_data.get(k) == v for k, v in OPTIMIZE_SETTINGS.items())
     except Exception:
         return False
     raise ValueError(f"設定グループが存在しません: {group_name}")
+

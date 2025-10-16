@@ -17,7 +17,7 @@
 ---
 ## 🎥 デモ動画
 
-[Demo](https://youtu.be/YwGEpJqrGJQ)
+[Demo](https://youtu.be/z3AU4aGuoVw)
 
 ## 🧩 対応環境
 

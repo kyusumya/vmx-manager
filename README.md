@@ -31,7 +31,7 @@
 2. このリポジトリをクローン：
 
    ```bash
-   git clone https://github.com/yourname/vmx-optimizer.git
+   git clone https://github.com/kyusumya/vmx-manager.git
    cd vmx-optimizer
    ```
 

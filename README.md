@@ -15,9 +15,12 @@
 | 💾 **preferences.ini 読み込み** | VMware の最近使用した VMX 情報を自動取得。 |
 
 ---
+
 ## 🎥 デモ動画
 
 [![Demo](assets/screenshot.png)](https://youtu.be/z3AU4aGuoVw)
+
+---
 
 ## 🧩 対応環境
 

@@ -4,14 +4,17 @@ from pathlib import Path
 from .vmx_utils import set_vmx_value, read_vmx
 
 OPTIMIZE_SETTINGS = {
-    "sched.mem.pshare.enable": "FALSE",
-    "mainMem.useNamedFile": "FALSE",
-    "prefvmx.minVmMemPct": "100",
-    "prefvmx.useRecommendedLockedMemSize": "TRUE",
-    "mainMem.partialLazySave": "FALSE",
-    "mainMem.partialLazyRestore": "FALSE",
-    "priority.grabbed": "high",
-    "priority.ungrabbed": "normal",
+    "sched.mem.pshare.enable": "FALSE",            # メモリ共有を無効化
+    "mainMem.useNamedFile": "FALSE",               # メインメモリをファイルとして保存しない
+    "prefvmx.minVmMemPct": "100",                  # 仮想マシンに割り当てる最小メモリを100%に設定
+    "prefvmx.useRecommendedLockedMemSize": "TRUE", # 推奨ロック済みメモリサイズを使用
+    "mainMem.partialLazySave": "FALSE",            # メモリを部分的に遅延保存しない
+    "mainMem.partialLazyRestore": "FALSE",         # メモリを部分的に遅延復元しない
+    "priority.grabbed": "high",                    # アクティブ時のCPU優先度を高に設定
+    "priority.ungrabbed": "normal",                # 非アクティブ時のCPU優先度を通常に設定
+    "logging": "FALSE",                            # ログ出力を無効化
+    "log.keepOld": "0",                            # 古いログを保持しない
+    "log.rotateSize": "0"                          # ログローテーションを無効化
 }
 
 def apply_optimization(vmx_path: Path):

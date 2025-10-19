@@ -11,10 +11,11 @@ OPTIMIZE_SETTINGS = {
     "mainMem.partialLazySave": "FALSE",            # メモリを部分的に遅延保存しない
     "mainMem.partialLazyRestore": "FALSE",         # メモリを部分的に遅延復元しない
     "priority.grabbed": "high",                    # アクティブ時のCPU優先度を高に設定
-    "priority.ungrabbed": "normal",                # 非アクティブ時のCPU優先度を通常に設定
+    # "priority.ungrabbed": "normal",                # 非アクティブ時のCPU優先度を通常に設定
     "logging": "FALSE",                            # ログ出力を無効化
     "log.keepOld": "0",                            # 古いログを保持しない
-    "log.rotateSize": "0"                          # ログローテーションを無効化
+    "log.rotateSize": "0",                         # ログローテーションを無効化
+    "mainMem.useAnonymousMemory": "TRUE"           # メモリを匿名メモリとして確保し、.vmemファイルを作らない
 }
 
 def apply_optimization(vmx_path: Path):

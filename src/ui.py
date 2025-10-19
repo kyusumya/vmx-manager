@@ -7,7 +7,7 @@ import tkinter as tk
 from tkinter import filedialog
 
 from .vmx_config import apply_config, is_config_applied
-from .preferences import get_recent_vmx_from_preferences, get_recent_vmx_from_folder
+from .vmx_list import get_recent_vmx_from_inventory, get_recent_vmx_from_folder
 from .lang import t
 
 # クロスプラットフォーム任意キー待ち
@@ -46,7 +46,7 @@ def select_vmx_folder(settings: dict, default_path=None) -> Path | None:
 
 def select_vmx_list(settings: dict, message_key="select_vmx", vmx_folder: Path = None) -> list[Path]:
     """VMXリスト選択（CLI）"""
-    vmx_list = get_recent_vmx_from_folder(vmx_folder) if vmx_folder else get_recent_vmx_from_preferences()
+    vmx_list = get_recent_vmx_from_folder(vmx_folder) if vmx_folder else get_recent_vmx_from_inventory()
     vmx_list = [p for p in vmx_list if p.exists()]
 
     if not vmx_list:
@@ -101,7 +101,7 @@ def main_menu():
 
     while True:
         clear_screen()
-        vmx_source = f"{t('vmx_source', settings)}: {settings['vmx_folder']}" if settings.get("vmx_folder") else f"{t('vmx_source', settings)}: preferences.ini"
+        vmx_source = f"{t('vmx_source', settings)}: {settings['vmx_folder']}" if settings.get("vmx_folder") else f"{t('vmx_source', settings)}: inventory.vmls"
         print(vmx_source + "\n")
 
         choice = inquirer.select(
@@ -143,7 +143,7 @@ def main_menu():
 
         elif choice == "status":
             clear_screen()
-            vmx_list = get_recent_vmx_from_folder(settings.get("vmx_folder")) if settings.get("vmx_folder") else get_recent_vmx_from_preferences()
+            vmx_list = get_recent_vmx_from_folder(settings.get("vmx_folder")) if settings.get("vmx_folder") else get_recent_vmx_from_inventory()
             vmx_list = [p for p in vmx_list if p.exists()]
 
             if not vmx_list:

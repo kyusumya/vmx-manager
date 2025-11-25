@@ -141,7 +141,7 @@ def main_menu():
                 for vmx in vmx_list:
                     spoofed = "✅" if is_config_applied(vmx, "spoofing") else "❌"
                     optimized = "✅" if is_config_applied(vmx, "optimize") else "❌"
-                    isolation = "✅" if is_config_applied(vmx, "isolation") else "❌"
+                    isolation = "🔴" if is_config_applied(vmx, "isolation") else "🟢"
                     
                     print(f"{t('spoofed', settings)}: {spoofed} | {t('optimized', settings)}: {optimized} | {t('isolation', settings)}: {isolation} | {vmx}")
             wait_key(t("press_any_key", settings))

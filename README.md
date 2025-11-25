@@ -1,4 +1,4 @@
-# ⚙️ VMX Manager
+# ⚙️ VMX Customizer
 
 **VMware Workstation / Player** の `.vmx` 設定ファイルをCLI で簡単に最適化 & スプーフィングできるツールです 💻  
 
@@ -37,7 +37,7 @@
 2. このリポジトリをクローン：
 
    ```bash
-   git clone https://github.com/kyusumya/vmx-manager.git
+   git clone https://github.com/kyusumya/vmx-customizer.git
    cd vmx-optimizer
    ```
 

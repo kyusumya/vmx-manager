@@ -1,7 +1,7 @@
 import random
 from pathlib import Path
 
-from .vmx_utils import set_vmx_value, read_vmx
+from .vmx_utils import set_vmx_value, read_vmx, delete_vmx_value
 
 OPTIMIZE_SETTINGS = {
     "sched.mem.pshare.enable": "FALSE",            # メモリ共有を無効化
@@ -15,7 +15,15 @@ OPTIMIZE_SETTINGS = {
     "log.keepOld": "0",                            # 古いログを保持しない
     "log.rotateSize": "0",                         # ログローテーションを無効化
     "mainMem.useAnonymousMemory": "TRUE",          # メモリを匿名メモリとして確保し、.vmemファイルを作らない
-    "MemTrimRate": "0"                             # メモリトリムレートを無効化
+    "MemTrimRate": "0",                            # メモリトリムレートを無効化
+    "isolation.tools.syncTime": "FALSE"            # ホストとの時刻同期を無効化
+}
+
+ISOLATION_SETTINGS = {
+    "isolation.tools.hgfs.disable": "TRUE",
+    "isolation.tools.copy.disable": "TRUE",
+    "isolation.tools.paste.disable": "TRUE",
+    "isolation.tools.setGUIOptions.enable": "FALSE"
 }
 
 def apply_optimization(vmx_path: Path):
@@ -32,12 +40,23 @@ def apply_spoofing(vmx_path: Path):
     set_vmx_value(vmx_path, "uuid.bios", generated_uuid)
     set_vmx_value(vmx_path, "smbios.uuid", generated_uuid)
 
+def apply_isolation(vmx_path: Path):
+    """ホスト統合機能をトグル式で設定"""
+    vmx_data = read_vmx(vmx_path)
+    for k, v in ISOLATION_SETTINGS.items():
+        if k in vmx_data:
+            delete_vmx_value(vmx_path, k)
+        else:
+            set_vmx_value(vmx_path, k, v)
+
 def apply_config(vmx_path: Path, group_name: str):
     """グループに応じてVMXに設定を適用"""
     if group_name == "optimize":
         apply_optimization(vmx_path)
     elif group_name == "spoofing":
         apply_spoofing(vmx_path)
+    elif group_name == "isolation":
+        apply_isolation(vmx_path)
     else:
         raise ValueError(f"設定グループが存在しません: {group_name}")
 
@@ -49,6 +68,8 @@ def is_config_applied(vmx_path: Path, group_name: str) -> bool:
             return "uuid.bios" in vmx_data and "smbios.uuid" in vmx_data
         elif group_name == "optimize":
             return all(vmx_data.get(k) == v for k, v in OPTIMIZE_SETTINGS.items())
+        elif group_name == "isolation":
+            return all(vmx_data.get(k) == v for k, v in ISOLATION_SETTINGS.items())
     except Exception:
         return False
     raise ValueError(f"設定グループが存在しません: {group_name}")

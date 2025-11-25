@@ -109,34 +109,22 @@ def main_menu():
             choices=[
                 {"name": t("menu_optimize", settings), "value": "optimize"},
                 {"name": t("menu_spoofing", settings), "value": "spoofing"},
+                {"name": t("menu_isolation", settings), "value": "isolation"},
                 {"name": t("menu_status", settings), "value": "status"},
                 {"name": t("menu_settings", settings), "value": "settings"},
                 {"name": t("menu_exit", settings), "value": "exit"}
             ],
         ).execute()
 
-        if choice == "optimize":
-            selected_vmx = select_vmx_list(settings, "menu_optimize", settings.get("vmx_folder"))
+        if choice in ["optimize", "spoofing", "isolation"]:
+            selected_vmx = select_vmx_list(settings, f"menu_{choice}", settings.get("vmx_folder"))
             if not selected_vmx:
                 wait_key(t("press_any_key", settings))
                 continue
             for vmx in selected_vmx:
                 try:
-                    apply_config(vmx, "optimize")
+                    apply_config(vmx, choice)
                     print(f"✅ {vmx} {t('done', settings)}")
-                except Exception as e:
-                    print(f"⚠️ {vmx} {t('fail', settings)}: {e}")
-            wait_key(t("press_any_key", settings))
-
-        elif choice == "spoofing":
-            selected_vmx = select_vmx_list(settings, "menu_spoofing", settings.get("vmx_folder"))
-            if not selected_vmx:
-                wait_key(t("press_any_key", settings))
-                continue
-            for vmx in selected_vmx:
-                try:
-                    apply_config(vmx, "spoofing")
-                    print(f"🎭 {vmx} {t('done', settings)}")
                 except Exception as e:
                     print(f"⚠️ {vmx} {t('fail', settings)}: {e}")
             wait_key(t("press_any_key", settings))
@@ -153,7 +141,9 @@ def main_menu():
                 for vmx in vmx_list:
                     spoofed = "✅" if is_config_applied(vmx, "spoofing") else "❌"
                     optimized = "✅" if is_config_applied(vmx, "optimize") else "❌"
-                    print(f"{t('spoofed', settings)}: {spoofed} | {t('optimized', settings)}: {optimized} | {vmx}")
+                    isolation = "✅" if is_config_applied(vmx, "isolation") else "❌"
+                    
+                    print(f"{t('spoofed', settings)}: {spoofed} | {t('optimized', settings)}: {optimized} | {t('isolation', settings)}: {isolation} | {vmx}")
             wait_key(t("press_any_key", settings))
 
         elif choice == "settings":

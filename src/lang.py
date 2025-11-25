@@ -9,6 +9,7 @@ TRANSLATIONS = {
     "ja": {
         "menu_optimize": "VM最適化",
         "menu_spoofing": "VMスプーフィング",
+        "menu_isolation": "VM統合機能",
         "menu_status": "設定状況確認",
         "menu_settings": "設定",
         "menu_exit": "閉じる",
@@ -32,6 +33,7 @@ TRANSLATIONS = {
     "en": {
         "menu_optimize": "Optimize VM",
         "menu_spoofing": "VM Spoofing",
+        "menu_isolation": "VM Isolation",
         "menu_status": "Check Status",
         "menu_settings": "Settings",
         "menu_exit": "Exit",

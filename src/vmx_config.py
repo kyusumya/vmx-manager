@@ -38,7 +38,7 @@ ISOLATION_SETTINGS = {
     "isolation.tools.hgfs.disable": "TRUE",             # ホスト-ゲスト間の共有フォルダを無効化
     "isolation.tools.copy.disable": "TRUE",             # ゲストからホストへのコピーを無効化
     "isolation.tools.paste.disable": "TRUE",            # ホストからゲストへのペーストを無効化
-    "isolation.tools.dnd.disable": "TRUE",      # ドラッグ&ドロップ操作を無効化
+    "isolation.tools.dnd.disable": "TRUE",              # ドラッグ&ドロップ操作を無効化
     "isolation.tools.setGUIOptions.enable": "FALSE"     # GUI設定変更機能を無効化
 }
 

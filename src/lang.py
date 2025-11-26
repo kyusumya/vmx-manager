@@ -28,7 +28,7 @@ TRANSLATIONS = {
         "fail": "書き込み失敗",
         "press_any_key": "任意のキーを押して戻る…",
         "instruction_checkbox": "スペースで選択、Enterで確定",
-        "vmx_source": "📂 VMX取得方法"
+        "vmx_source": "📂 VMX取得方法",
     },
     "en": {
         "menu_optimize": "Optimize VM",
@@ -52,7 +52,7 @@ TRANSLATIONS = {
         "fail": "Write failed",
         "press_any_key": "Press any key to return...",
         "instruction_checkbox": "Space to select, Enter to confirm",
-        "vmx_source": "📂 VMX Source"
+        "vmx_source": "📂 VMX Source",
     }
 }
 

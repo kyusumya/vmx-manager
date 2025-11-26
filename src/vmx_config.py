@@ -29,9 +29,6 @@ OPTIMIZE_SETTINGS = {
     "log.keepOld": "0",                                 # 古いログを保持しない
     "log.rotateSize": "0",                              # ログローテーションを無効化
     "debug": "FALSE",                                   # デバッグを無効化
-    "monitor_control.disable_mmu_largepages": "TRUE",   # 大きなページのMMUを無効化
-    "monitor_control.disable_svm": "TRUE",              # AMD SVM仮想化機能を無効化
-    "monitor_control.disable_interleaved_reads": "TRUE" # インタリーブ読み取りを無効化
 }
 
 ISOLATION_SETTINGS = {
@@ -87,4 +84,5 @@ def is_config_applied(vmx_path: Path, group_name: str) -> bool:
     except Exception:
         return False
     raise ValueError(f"設定グループが存在しません: {group_name}")
+
 

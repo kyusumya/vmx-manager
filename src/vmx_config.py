@@ -5,38 +5,28 @@ from .vmx_utils import set_vmx_value, read_vmx, delete_vmx_value
 
 OPTIMIZE_SETTINGS = {
     # Performance
-    "prefvmx.minVmMemPct": "100",                       # 仮想マシンに割り当てる最小メモリを100%に設定
-    "prefvmx.useRecommendedLockedMemSize": "TRUE",      # 推奨ロック済みメモリサイズを使用
     "priority.grabbed": "high",                         # アクティブ時のCPU優先度を高に設定
     "MemTrimRate": "0",                                 # メモリトリムレートを無効化
 
 
     # Security
-    "isolation.tools.syncTime": "FALSE",                # ホストとの時刻同期を無効化
-    "time.synchronize.continue": "FALSE",               # ゲストOSの継続時刻同期を無効化
-    "time.synchronize.tools.enable": "FALSE",           # VMware Toolsによる時刻同期を無効化
-    "tools.setInfo.sizeLimit": "1",                     # VMware Toolsでの情報送信サイズを最小に制限
-    "tools.setInfo.disable": "TRUE",                    # VMware Toolsによる情報送信を無効化
-    "printers.enabled": "FALSE",                        # ゲストOSからホストプリンタへのアクセスを無効化
-
-    "sched.mem.pshare.enable": "FALSE",                 # メモリ共有を無効化
-    "mainMem.useNamedFile": "FALSE",                    # メインメモリをファイルとして保存しない
-    "mainMem.partialLazySave": "FALSE",                 # メモリを部分的に遅延保存しない
-    "mainMem.partialLazyRestore": "FALSE",              # メモリを部分的に遅延復元しない
-    "mainMem.useAnonymousMemory": "TRUE",               # メモリを匿名メモリとして確保し、.vmemファイルを作らない
+    "isolation.tools.syncTime": "FALSE",
+    "time.synchronize.continue": "FALSE",
+    "time.synchronize.restore": "FALSE",
+    "time.synchronize.resume.disk": "FALSE",
+    "time.synchronize.shrink": "FALSE",
+    "time.synchronize.tools.startup": "FALSE",
+    "time.synchronize.tools.enable": "FALSE",
+    "time.synchronize.resume.host": "FALSE",
 
     "logging": "FALSE",                                 # ログ出力を無効化
-    "log.keepOld": "0",                                 # 古いログを保持しない
-    "log.rotateSize": "0",                              # ログローテーションを無効化
-    "debug": "FALSE",                                   # デバッグを無効化
+    "vmx.buildType": "release",                         # デバッグ情報の収集を無効化
 }
 
 ISOLATION_SETTINGS = {
-    "isolation.tools.hgfs.disable": "TRUE",             # ホスト-ゲスト間の共有フォルダを無効化
     "isolation.tools.copy.disable": "TRUE",             # ゲストからホストへのコピーを無効化
     "isolation.tools.paste.disable": "TRUE",            # ホストからゲストへのペーストを無効化
     "isolation.tools.dnd.disable": "TRUE",              # ドラッグ&ドロップ操作を無効化
-    "isolation.tools.setGUIOptions.enable": "FALSE"     # GUI設定変更機能を無効化
 }
 
 def apply_optimization(vmx_path: Path):
@@ -84,5 +74,4 @@ def is_config_applied(vmx_path: Path, group_name: str) -> bool:
     except Exception:
         return False
     raise ValueError(f"設定グループが存在しません: {group_name}")
-
 
